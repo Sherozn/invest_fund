@@ -1,0 +1,36 @@
+{
+  "pages": [
+    "pages/index/main",
+    "pages/me/main",
+    "pages/record/main",
+    "pages/addfund/main"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#EA5149",
+    "navigationBarTitleText": "游戏人生-自律神器",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "selectedColor": "black",
+
+    "list": [{
+      "text": "首页",
+      "pagePath": "pages/index/main",
+      "iconPath": "static/images/danhuang.png",
+      "selectedIconPath": "static/images/danhuang-active.png"
+    }, 
+    {
+      "pagePath":"pages/record/main",
+      "text":"记录",
+      "iconPath": "static/images/huasheng.png",
+      "selectedIconPath": "static/images/huasheng-active.png"
+    },
+    {
+      "text": "我的",
+      "pagePath": "pages/me/main",
+      "iconPath": "static/images/binggan.png",
+      "selectedIconPath": "static/images/binggan-active.png"
+    }]
+  }
+}

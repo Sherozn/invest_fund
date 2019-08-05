@@ -35,5 +35,7 @@ router.post('/resetmart', controllers.resetmart)
 router.post('/deleterecord', controllers.deleterecord)
 router.post('/createrecord', controllers.createrecord)
 router.get('/getmark', controllers.getmark)
+router.get('/getrecords', controllers.getrecords)
+router.post('/updatenote', controllers.updatenote)
 
 module.exports = router

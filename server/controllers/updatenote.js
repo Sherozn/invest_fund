@@ -1,22 +1,14 @@
 const {mysql} = require('../qcloud')
 
 module.exports = async (ctx) => {
-  const {openid} = ctx.request.body
+  const {id,note} = ctx.request.body
   try{
     const res = await mysql('records')
-        .where("openid",openid)
-        .orderBy('id','desc').first()
-    if(res){
-      var add = res.add
-      await mysql('records')
-        .where("id",res.id).del()
-    }else{
-      var add = 0
-    }
-    
+        .where("id",id)
+        .update("note",note)
+
     ctx.state.data = {
       code: 0,
-      add:add,
       msg: 'success'
     }
   }catch(e){

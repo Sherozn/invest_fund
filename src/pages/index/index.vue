@@ -90,8 +90,8 @@
 	    	try{
 	        const res = await post('/weapp/deleterecord', {openid:this.userinfo.openId})
 	        console.log("res",res)
-	        add = res.add
-	        this.mark = this.mark + add
+	        var add = res.add
+	        this.mark = this.mark - add
 	      }catch(e){
 	        showModal('失败', e.data.msg)
 	      }

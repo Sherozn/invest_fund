@@ -1,17 +1,22 @@
 <template>
   <div class="book-card">
     <div class="table" width="98%">
-      <div class="tr" @click='ellipsi'>
+      <div class="tr">
         <div class="date">{{create_time}}</div>
         <div class="busi">
-          <label v-if="record.add > 0">+</label>{{record.add}}
+          <label v-if="record.add > 0">+{{record.add}}</label>
+          <label v-else-if="record.add == 0">&nbsp;0</label>
+          <label v-else>{{record.add}}</label>
         </div>
-        <div class="mark">{{record.mark}}</div>
-        <div class="net">
+        <div class="mark">
+          <label v-if="record.mark >= 0">&nbsp;{{record.mark}}</label>
+          <label v-else>{{record.mark}}</label>
+        </div>
+        <div class="net" @click='ellipsi'>
           <label v-if="record.note">{{record.note}}</label>
           <label v-else class="no-note">点击添加</label>
         </div>
-        <div class="image"><image class='img' :src="ellipsis?'/static/images/right.png':'/static/images/down.png'"></image></div>
+        <div class="image" @click='ellipsi'><image class='img' :src="ellipsis?'/static/images/quxiao.png':src"></image></div>
       </div>
     </div>
     <div class="hide" v-if="ellipsis">
@@ -24,7 +29,6 @@
             class="input"
             maxlength='10'
             placeholder="最多输入10个字">
-      
     </div>
   </div>
 </template>
@@ -42,11 +46,12 @@ export default {
       cost:0.0,
       ellipsis: false,
       create_time:"",
-      note:""
+      note:"",
+      src:""
     }
   },
   methods: {
-    ellipsi(){  
+    ellipsi () {  
       this.ellipsis = !this.ellipsis
       console.log("this.index",this.index)
     },
@@ -56,10 +61,17 @@ export default {
         note:this.note
       }
       const res = await post('/weapp/updatenote', data)
+    },
+    getSrc () {
+      if(this.record.note){
+        this.src = '/static/images/bianji.png'
+      }
     }
   },
   mounted () {
     this.create_time = formatTime(new Date(this.record.create_time))
+    this.note = this.record.note
+    this.getSrc()
   }
 }
 </script>
@@ -78,12 +90,11 @@ export default {
       width: 100%;
     }
     .date{
-      width: 45%;
-      margin-left: 5px;
+      width: 40%;
+      margin-left: 10px;
     }
     .busi{
       width: 10%;
-      margin-left: 5px;
       font-weight:bold;
     }
     .mark{
@@ -92,13 +103,15 @@ export default {
       font-weight:bold;
     }
     .net{
-      width: 20%;
+      width: 16%;
       text-align:center;
-      width:90px;
+      width:60px;
       overflow:hidden;
       text-overflow:ellipsis;
       white-space:nowrap;
       font-size: 14px;
+      margin-left: 5px;
+      line-height:42px;
       .no-note{
         text-decoration:underline;
         color:#C0C0C0;
@@ -106,6 +119,7 @@ export default {
       }
     }
     .image{
+      padding-top:1px;
       float: right;
       margin-left: 5px;
     }

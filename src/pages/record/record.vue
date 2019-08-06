@@ -6,7 +6,7 @@
 	 	<div v-else>
 	 		<div class="table th">
         <div class="date">时间</div>
-        <div class="busi">操作</div>
+        <div class="busi">分数</div>
         <div class="mark">最后得分</div>
         <div class="net">备注</div>
       </div>
@@ -117,7 +117,7 @@
   }
   .busi{
     width: 10%;
-    margin-left: 13px;
+    margin-left: 5px;
   }
   .mark{
   	width: 20%;

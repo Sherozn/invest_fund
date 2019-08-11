@@ -70,6 +70,10 @@
 	      wx.hideToast()
 		  }
 	  },
+	  onPullDownRefresh () {
+	    this.getRecords(true)
+	    wx.stopPullDownRefresh()
+	  },
 	  // 到达底部
 	  onReachBottom () {
 	    console.log("!this.more",!this.more)
@@ -80,6 +84,9 @@
 	    this.page = this.page + 1
 	    console.log("this.page",this.page)
 	    this.getRecords()
+	  },
+	  onShow () {
+	  	this.getRecords(true)
 	  },
 	  mounted () {
 	  	//获取缓存中名为userinfo的信息。

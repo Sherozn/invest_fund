@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/record/main",
     "pages/index/main",
+    "pages/record/main",
     "pages/me/main",
     "pages/addfund/main"
   ],

@@ -20,6 +20,31 @@
   			<div class="right button" @click='addMark(5)'>+ 5</div>
   			<div class="left button" @click='addMark(-5)'>- 5</div>
   		</div>
+
+  	  <div class="row">
+
+
+ 				<div @click="show_pro()">点我显示弹窗</div>
+      		<!--弹窗的页面-->
+         <div class="modalMask" v-if="isModel"></div>
+         <div class="modalDialog" v-if="changeModel">
+          <div class="modalContent">
+            <p class="contentTip">小程序介绍</p>
+            <div class="contentText">
+             	将自己的人生想象成通关打怪，打败自己的心魔加分，被心魔打败减分
+							加减多少分没有具体指标，主要看心魔给你带来的影响。
+							游戏人生是一款自律神器，将分数作为奖励惩罚手段，提醒对良好行为的关注和强化。
+					  </div>
+             <!-- <img class="img" :src="src"> -->
+          </div>
+          <div class="modalFooter">
+             <div class="btnCancel" @tap="tapCancel">跳过</div>
+             <div class="btnConfirm" @tap="confirmSend">点击查看</div>
+          </div>
+         </div>
+
+
+			</div>
   	</div>
   	<!-- 如果用户没有登录，则显示授权登录的页面 -->
     <div v-else>
@@ -42,6 +67,9 @@
 	      src: "../../static/images/plus-circle.png",
 	      mark:0,
 	      add:1,
+	      changeModel: false,
+       isModel: false,
+       val: "",
     	}
     },
 		methods: {
@@ -129,7 +157,24 @@
 	    		showModal('失败', "页面加载失败，请下拉页面重试哦~")
 	    		console.log("e resetmart",e)
 	    	}
-	    }
+	    },
+	     tapCancel() {
+       console.log("取消");
+       this.changeModel = !this.changeModel;
+       this.isModel = !this.isModel;
+     },
+     //  确认
+     confirmSend() {
+       console.log("确认");
+       this.changeModel = !this.changeModel;
+       this.isModel = !this.isModel;
+ 
+     },
+     show_pro(val) {
+         this.changeModel = !this.changeModel;
+         this.isModel = !this.isModel;
+     }
+
 		},
 		mounted () {
 			//获取缓存中名为userinfo的信息。
@@ -204,5 +249,88 @@
 .left{
 	background:#feb600;
   margin-right:80px;
+}
+.modalMask {
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	background: #000;
+	opacity: 0.5;
+	overflow: hidden;
+	z-index: 9000;
+	color: #fff;
+}
+.modalDialog {
+	box-sizing: border-box;
+	width: 560rpx;
+	overflow: hidden;
+	position: fixed;
+	top: 30%;
+	left: 0;
+	z-index: 9999;
+	background: #fff;
+	margin: -180rpx 95rpx;
+	border-radius: 8rpx;
+}
+.modalContent {
+	box-sizing: border-box;
+	display: flex;
+	padding: 30rpx 53rpx;
+	font-size: 32rpx;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+.modalFooter {
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: row;
+	height: 80rpx;
+	border-top: 1px solid #e5e5e5;
+	font-size: 32rpx;
+	line-height: 80rpx;
+}
+.contentTip {
+	text-align: center;
+	font-size: 36rpx;
+	color: #333333;
+}
+.contentText {
+	height:220px;
+	padding:10px 0px 50px 0px;
+	font-size:14px;
+}
+.teleStyle {
+	background: #ffffff;
+	border: 1px solid #979797;
+	border-radius: 6rpx;
+	line-height: 50rpx;
+	height: 50rpx;
+	box-sizing: border-box;
+	padding-left: 12rpx;
+	width: 460rpx;
+	font-size: 28rpx;
+	/*color: rgba(0,0,0,0.25);*/
+	margin-top: 30px;
+}
+.btnCancel {
+	width: 50%;
+	font-size: 32rpx;
+	color: #333;
+	text-align: center;
+	border-right: 1px solid #e5e5e5;
+}
+.btnConfirm {
+	font-size: 32rpx;
+	width: 50%;
+	color: #508cee;
+	text-align: center;
+}
+.img {
+	width: 100px;
+	height:100px;
+	border-radius: 50%;
 }
 </style>

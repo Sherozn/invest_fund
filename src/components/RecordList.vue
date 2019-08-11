@@ -13,7 +13,7 @@
           <label v-else>{{record.mark}}</label>
         </div>
         <div class="net" @click='ellipsi'>
-          <label v-if="record.note">{{record.note}}</label>
+          <label v-if="note">{{note}}</label>
           <label v-else class="no-note">点击添加</label>
         </div>
         <div class="image" @click='ellipsi'><image class='img' :src="ellipsis?'/static/images/quxiao.png':src"></image></div>
@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import {get,post} from '@/util'
+import {get,post,showModal} from '@/util'
 import {formatTime} from '../utils/index.js'
 export default {
   props: ['record'],
@@ -60,10 +60,17 @@ export default {
         id: this.record.id,
         note:this.note
       }
-      const res = await post('/weapp/updatenote', data)
+      try{
+        const res = await post('/weapp/updatenote', data)
+        console.log("res recordList",res)
+        this.ellipsis = false
+        this.src = '/static/images/bianji.png'
+      }catch(e){
+        showModal('失败', "请重新提交哦~")
+      }
     },
     getSrc () {
-      if(this.record.note){
+      if(this.note){
         this.src = '/static/images/bianji.png'
       }
     }
@@ -154,5 +161,10 @@ export default {
     height: 13px;
     margin-right: 5px;
   }
+}
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
 }
 </style>

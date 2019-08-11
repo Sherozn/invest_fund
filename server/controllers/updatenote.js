@@ -6,7 +6,6 @@ module.exports = async (ctx) => {
     const res = await mysql('records')
         .where("id",id)
         .update("note",note)
-
     ctx.state.data = {
       code: 0,
       msg: 'success'

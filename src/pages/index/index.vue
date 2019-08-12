@@ -29,17 +29,22 @@
          <div class="modalMask" v-if="isModel"></div>
          <div class="modalDialog" v-if="changeModel">
           <div class="modalContent">
-            <p class="contentTip">小程序介绍</p>
+            <!-- <p class="contentTip">小程序介绍</p> -->
+            <img class="img" :src="src">
             <div class="contentText">
-             	将自己的人生想象成通关打怪，打败自己的心魔加分，被心魔打败减分
-							加减多少分没有具体指标，主要看心魔给你带来的影响。
-							游戏人生是一款自律神器，将分数作为奖励惩罚手段，提醒对良好行为的关注和强化。
+             	将人生想象成通关打怪，打败自己的心魔加分，被心魔打败减分。</br>
+
+             	<p class="littleTip">举个例子：</p>
+              午饭忍住没有吃麻辣烫，吃的绿色蔬菜，加5分；</br>
+							但是晚饭还是没有忍住T_T，罪恶罪恶，减10分。</br>
+							
+							将分数作为奖励惩罚手段，提醒对良好行为的关注和强化。
 					  </div>
              <!-- <img class="img" :src="src"> -->
           </div>
           <div class="modalFooter">
-             <div class="btnCancel" @tap="tapCancel">跳过</div>
-             <div class="btnConfirm" @tap="confirmSend">点击查看</div>
+             <div class="btnCancel" @tap="tapCancel">回到小程序</div>
+             <div class="btnConfirm" @tap="confirmSend">了解详情</div>
           </div>
          </div>
 
@@ -64,7 +69,7 @@
       return {
     	  userinfo:{},
     	  // src就是我们刚刚粘贴的images文件夹中的图标路径
-	      src: "../../static/images/plus-circle.png",
+	      src: "../../static/images/littleTip-huang.jpg",
 	      mark:0,
 	      add:1,
 	      changeModel: false,
@@ -272,12 +277,12 @@
 	z-index: 9999;
 	background: #fff;
 	margin: -180rpx 95rpx;
-	border-radius: 8rpx;
+	border-radius: 16rpx;
 }
 .modalContent {
 	box-sizing: border-box;
 	display: flex;
-	padding: 30rpx 53rpx;
+	padding: 0rpx 53rpx 50rpx 53rpx;
 	font-size: 32rpx;
 	align-items: center;
 	justify-content: center;
@@ -287,10 +292,10 @@
 	box-sizing: border-box;
 	display: flex;
 	flex-direction: row;
-	height: 80rpx;
+	height: 90rpx;
 	border-top: 1px solid #e5e5e5;
 	font-size: 32rpx;
-	line-height: 80rpx;
+	line-height: 90rpx;
 }
 .contentTip {
 	text-align: center;
@@ -318,19 +323,26 @@
 .btnCancel {
 	width: 50%;
 	font-size: 32rpx;
+	font-weight:bold;
 	color: #333;
 	text-align: center;
 	border-right: 1px solid #e5e5e5;
 }
 .btnConfirm {
 	font-size: 32rpx;
+	font-weight:bold;
+	background:#EA5149;
 	width: 50%;
-	color: #508cee;
+	color: #FFFFFF;
 	text-align: center;
+	border-right: 1px solid #e5e5e5;
 }
 .img {
-	width: 100px;
-	height:100px;
-	border-radius: 50%;
+	width: 560rpx;
+	height:180rpx;
+}
+.littleTip {
+	font-size: 14px;
+	color: #EA5149;
 }
 </style>

@@ -32,19 +32,23 @@
             <!-- <p class="contentTip">小程序介绍</p> -->
             <img class="img" :src="src">
             <div class="contentText">
-             	将人生想象成通关打怪，打败自己的心魔加分，被心魔打败减分。</br>
+             	<p class="keyBold">将人生想象成通关打怪，打败自己的心魔加分，被心魔打败减分。</br>
+             	将分数作为奖励惩罚手段，提醒对良好行为的关注和强化。</p>
 
              	<p class="littleTip">举个例子：</p>
-              午饭忍住没有吃麻辣烫，吃的绿色蔬菜，加5分；</br>
-							但是晚饭还是没有忍住T_T，罪恶罪恶，减10分。</br>
+             	<p class="littleContent">
+	              午饭忍住没有吃麻辣烫，吃的绿色蔬菜，加5分；</br>
+								但是晚饭还是没有忍住T_T，罪恶罪恶，减10分。</br>
+								攒够100分，可以奖励自己一顿海底捞~</br>
+							</p>
 							
-							将分数作为奖励惩罚手段，提醒对良好行为的关注和强化。
+							
 					  </div>
              <!-- <img class="img" :src="src"> -->
           </div>
           <div class="modalFooter">
              <div class="btnCancel" @tap="tapCancel">回到小程序</div>
-             <div class="btnConfirm" @tap="confirmSend">了解详情</div>
+             <div class="btnConfirm" @tap="confirmSend">更多详情</div>
           </div>
          </div>
 
@@ -288,61 +292,55 @@
 	justify-content: center;
 	flex-direction: column;
 }
-.modalFooter {
-	box-sizing: border-box;
-	display: flex;
-	flex-direction: row;
-	height: 90rpx;
-	border-top: 1px solid #e5e5e5;
-	font-size: 32rpx;
-	line-height: 90rpx;
-}
 .contentTip {
 	text-align: center;
 	font-size: 36rpx;
 	color: #333333;
 }
 .contentText {
-	height:220px;
+	height:140px;
 	padding:10px 0px 50px 0px;
 	font-size:14px;
 }
-.teleStyle {
-	background: #ffffff;
-	border: 1px solid #979797;
-	border-radius: 6rpx;
-	line-height: 50rpx;
-	height: 50rpx;
+.modalFooter {
 	box-sizing: border-box;
-	padding-left: 12rpx;
-	width: 460rpx;
-	font-size: 28rpx;
-	/*color: rgba(0,0,0,0.25);*/
-	margin-top: 30px;
+	display: flex;
+	flex-direction: row;
+	border-top: 1px solid #e5e5e5;
+	font-size: 32rpx;
+	font-weight:bold;
+	height: 90rpx;
+	line-height: 90rpx;
+	text-align: center;
 }
 .btnCancel {
 	width: 50%;
-	font-size: 32rpx;
-	font-weight:bold;
+	background:#feb600;
 	color: #333;
-	text-align: center;
 	border-right: 1px solid #e5e5e5;
 }
 .btnConfirm {
-	font-size: 32rpx;
-	font-weight:bold;
-	background:#EA5149;
 	width: 50%;
+	background:#EA5149;
 	color: #FFFFFF;
-	text-align: center;
-	border-right: 1px solid #e5e5e5;
 }
 .img {
 	width: 560rpx;
 	height:180rpx;
 }
 .littleTip {
+	padding-top:5px;
+	padding-bottom:3px;
 	font-size: 14px;
-	color: #EA5149;
+	font-weight:bold;
+	color: #feb600;
+}
+.littleContent {
+	font-size: 13px;
+	color:#606060;
+}
+.keyBold {
+	font-size: 14px;
+	font-weight:bold;
 }
 </style>

@@ -1,14 +1,14 @@
 {
   "pages": [
+    "pages/me/main",
     "pages/index/main",
     "pages/record/main",
-    "pages/me/main",
-    "pages/addfund/main"
+    "pages/instruction/main"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#EA5149",
-    "navigationBarTitleText": "游戏人生-自律神器",
+    "navigationBarTitleText": "游戏人生 自律神器",
     "navigationBarTextStyle": "black"
   },
   "tabBar": {

@@ -26,17 +26,17 @@
 
  				<div @click="show_pro()">点我显示弹窗</div>
       		<!--弹窗的页面-->
-         <div class="modalMask" v-if="isModel"></div>
-         <div class="modalDialog" v-if="changeModel">
-          <div class="modalContent">
+         <div class="modal-mask" v-if="isModel"></div>
+         <div class="modal-dialog" v-if="changeModel">
+          <div class="modal-content">
             <!-- <p class="contentTip">小程序介绍</p> -->
             <img class="img" :src="src">
-            <div class="contentText">
-             	<p class="keyBold">将人生想象成通关打怪，打败自己的心魔加分，被心魔打败减分。</br>
+            <div class="content-text">
+             	<p class="key-bold">将人生想象成通关打怪，打败自己的心魔加分，被心魔打败减分。</br>
              	将分数作为奖励惩罚手段，提醒对良好行为的关注和强化。</p>
 
-             	<p class="littleTip">举个例子：</p>
-             	<p class="littleContent">
+             	<p class="little-tip">举个例子：</p>
+             	<p class="little-content">
 	              午饭忍住没有吃麻辣烫，吃的绿色蔬菜，加5分；</br>
 								但是晚饭还是没有忍住T_T，罪恶罪恶，减10分。</br>
 								攒够100分，可以奖励自己一顿海底捞~</br>
@@ -46,9 +46,9 @@
 					  </div>
              <!-- <img class="img" :src="src"> -->
           </div>
-          <div class="modalFooter">
-             <div class="btnCancel" @tap="tapCancel">回到小程序</div>
-             <div class="btnConfirm" @tap="confirmSend">更多详情</div>
+          <div class="modal-footer">
+             <div class="btn-cancel" @tap="tapCancel">回到小程序</div>
+             <div class="btn-confirm" @tap="confirmSend">更多详情</div>
           </div>
          </div>
 
@@ -77,8 +77,8 @@
 	      mark:0,
 	      add:1,
 	      changeModel: false,
-       isModel: false,
-       val: "",
+        isModel: false,
+        val: "",
     	}
     },
 		methods: {
@@ -259,7 +259,7 @@
 	background:#feb600;
   margin-right:80px;
 }
-.modalMask {
+.modal-mask {
 	width: 100%;
 	height: 100%;
 	position: fixed;
@@ -271,7 +271,7 @@
 	z-index: 9000;
 	color: #fff;
 }
-.modalDialog {
+.modal-dialog {
 	box-sizing: border-box;
 	width: 560rpx;
 	overflow: hidden;
@@ -283,7 +283,7 @@
 	margin: -180rpx 95rpx;
 	border-radius: 16rpx;
 }
-.modalContent {
+.modal-content {
 	box-sizing: border-box;
 	display: flex;
 	padding: 0rpx 53rpx 50rpx 53rpx;
@@ -292,17 +292,17 @@
 	justify-content: center;
 	flex-direction: column;
 }
-.contentTip {
+.content-tip {
 	text-align: center;
 	font-size: 36rpx;
 	color: #333333;
 }
-.contentText {
+.content-text {
 	height:140px;
 	padding:10px 0px 50px 0px;
 	font-size:14px;
 }
-.modalFooter {
+.modal-footer {
 	box-sizing: border-box;
 	display: flex;
 	flex-direction: row;
@@ -313,13 +313,13 @@
 	line-height: 90rpx;
 	text-align: center;
 }
-.btnCancel {
+.btn-cancel {
 	width: 50%;
 	background:#feb600;
 	color: #333;
 	border-right: 1px solid #e5e5e5;
 }
-.btnConfirm {
+.btn-confirm {
 	width: 50%;
 	background:#EA5149;
 	color: #FFFFFF;
@@ -328,18 +328,18 @@
 	width: 560rpx;
 	height:180rpx;
 }
-.littleTip {
+.little-tip {
 	padding-top:5px;
 	padding-bottom:3px;
 	font-size: 14px;
 	font-weight:bold;
 	color: #feb600;
 }
-.littleContent {
+.little-content {
 	font-size: 13px;
 	color:#606060;
 }
-.keyBold {
+.key-bold {
 	font-size: 14px;
 	font-weight:bold;
 }

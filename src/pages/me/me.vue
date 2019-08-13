@@ -29,7 +29,7 @@ export default {
     async addFund () {
     	// 小程序API，保留当前页面，跳转到应用内的某个页面
       wx.navigateTo({
-        url:'/pages/addfund/main'
+        url:'/pages/instruction/main'
       })
     },
     // async showIns () {

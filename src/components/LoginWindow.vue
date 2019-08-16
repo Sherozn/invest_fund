@@ -3,7 +3,6 @@
     <div class="modal-mask"></div>
     <div class="modal-dialog">
       <div class="modal-content">
-        <!-- <p class="contentTip">小程序介绍</p> -->
         <img class="img" :src="src">
         <div class="content-text">
           <p class="key-bold">游戏人生是一款自律神器。</p>
@@ -18,8 +17,7 @@
         </div>
       </div>
       <div class="modal-footer">
-         <!-- <div class="btn-cancel" @tap="tapCancel">回到首页</div> -->
-         <!-- <div class="btn-confirm" @tap="confirmSend">更多详情</div> -->
+         <!-- 小程序集成的API，通过button来授权登录 -->
          <button open-type="getUserInfo" lang="zh_CN" class='btn' @getuserinfo="login">授权登录</button>
       </div>
     </div>
@@ -125,26 +123,22 @@ export default {
   display: flex;
   flex-direction: row;
   border-top: 1px solid #e5e5e5;
-  font-size: 32rpx;
+  font-size: 16px;
   font-weight:bold;
-  height: 90rpx;
-  line-height: 90rpx;
+  height: 45px;
+  line-height: 45px;
   text-align: center;
-}
-.btn-cancel {
-  width: 50%;
   background:#feb600;
-  color: #333;
-  border-right: 1px solid #e5e5e5;
 }
-.btn-confirm {
-  width: 50%;
-  background:#EA5149;
-  color: #FFFFFF;
+button {
+  width: 100%;
+  background:#feb600;
+  color:#FFFFFF;
+  font-weight:bold;
 }
 .img {
-  width: 560rpx;
-  height:180rpx;
+  width: 280px;
+  height:90px;
 }
 .little-tip {
   padding-top:15px;

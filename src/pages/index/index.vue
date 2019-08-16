@@ -20,17 +20,12 @@
   			<div class="right button" @click='addMark(5)'>+ 5</div>
   			<div class="left button" @click='addMark(-5)'>- 5</div>
   		</div>
-
-  	  
   	</div>
   	<!-- 如果用户没有登录，则显示授权登录的页面 -->
-    <div v-else>
+    <div v-if="showLogin">
     	<div class="row">
  				<LoginWindow @change="getModel(arguments)" v-if="changeModel"></LoginWindow>
 			</div>
-  		<!-- <div class="prompt">您还未登录，请先</div> -->
-  		<!-- 小程序集成的API，通过button来授权登录 -->
-      
   	</div>
   </div>
 </template>
@@ -48,8 +43,9 @@
     	  // src就是我们刚刚粘贴的images文件夹中的图标路径
 	      mark:0,
 	      add:1,
-	      changeModel: false,
-        val: "",
+	      changeModel: true,
+	      showLogin:false,
+        val: ""
     	}
     },
 		methods: {
@@ -134,6 +130,7 @@
 		  	//如果当前用户没有缓存信息，则隐藏掉TabBar，从而实现在授权登录的页面不显示TabBar的效果
 		  	wx.hideTabBar()
 		  	this.changeModel = true
+		  	this.showLogin = true
 		  }
 		}
 	}

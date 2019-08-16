@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="instruction">
     <div class="title">
 		  <img class="img" :src="src">
       <p class="content content-title">游戏人生是一款自律神器，将分数作为奖励惩罚手段，提醒对良好行为的关注和强化。</p>
@@ -20,6 +20,20 @@
     <p class="content tip"><label class="point">◉</label> 物质的奖励。</br>比如凑足300分，奖励自己一顿海底捞；够了500分，奖励自己旅游基金1000元等。虽然都是从自己身上薅下的肉，但是生活更有仪式感了~</p>
 
     <p class="little-tip">3、小程序使用介绍</p>
+      <p class="content prompts">（1）首页</p>
+      <p class="content tip"><label class="point">◉</label> 清零功能：会将当前分数设为0，历史记录不会被清空。</p>
+      <p class="content tip"><label class="point">◉</label> 撤销功能：撤销上一步的操作。</p>
+      <img class="index-img" :src="src1">
+      <p class="content prompts">（2）记录页面</p>
+      <p class="content tip"><label class="point">◉</label> 添加备注：备注默认为空，可以点击添加备注。</p>
+      <p class="content tip"><label class="point">◉</label> 修改备注：备注添加完成后，可以修改。</p>
+      <img class="index-img" :src="src2">
+      <p class="content prompts">（3）我的页面</p>
+      <p class="content tip"><label class="point">◉</label> 清空记录：清空所有的历史记录，清空后记录不能恢复，谨慎操作~</p>
+      <p class="content tip"><label class="point">◉</label> 意见反馈：对于小程序的建议、问题反馈、合作信息等，可以通过这个页面提交。</p>
+      <img class="index-img" :src="src3">
+
+    
 
 
 	</div>
@@ -29,7 +43,10 @@
 export default {
 	data () {
     return {
-      src: "../../static/images/littleTip-huang.jpg"
+      src: "../../static/images/littleTip-huang.jpg",
+      src1: "../../static/images/index.jpg",
+      src2: "../../static/images/record.jpg",
+      src3: "../../static/images/me.jpg",
     }
   },
   methods:{
@@ -39,40 +56,52 @@ export default {
 </script>
 
 <style lang='scss'>
-.title {
-  background:#feb600;
-  border-radius: 16rpx;
-  font-size: 16px;
-  .img {
-    width:100%;
-    height:120px;
+.instruction {
+  .title {
+    background:#feb600;
+    border-radius: 16rpx;
+    font-size: 16px;
+    .img {
+      width:100%;
+      height:120px;
+    }
+    .content-title {
+      padding:4px 20px 10px 20px;
+    }
   }
-  .content-title {
-    padding:4px 20px 10px 20px;
+
+  .content {
+    padding:4px 15px;
+    font-size: 16px;
+    font-weight:bold;
   }
+  .little-tip {
+    padding:15px 15px 3px 15px;
+    font-size: 15px;
+    font-weight:bold;
+    color: #EA5149;
+  }
+  .tip {
+    font-size: 15px;
+    font-weight:normal;
+    .point{
+      color: #feb600;
+    }
+  }
+  .prompts {
+    font-size: 15px;
+  }
+
+  .index-img {
+    display:block;
+    margin:10px auto;
+    height:560px;
+    border-radius: 10px;
+    margin-bottom:30px;
+  }
+
 }
 
-.content {
-  padding:4px 15px;
-  font-size: 15px;
-  font-weight:bold;
-}
-.little-tip {
-  padding:15px 15px 3px 15px;
-  font-size: 15px;
-  font-weight:bold;
-  color: #EA5149;
-}
-.tip {
-  font-size: 13px;
-  font-weight:normal;
-  .point{
-    color: #feb600;
-  }
-}
-.prompts {
-  font-size: 13px;
-}
 
 
 </style>

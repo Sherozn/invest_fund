@@ -33,9 +33,11 @@ router.get('/message', controllers.message.get)
 router.post('/message', controllers.message.post)
 router.post('/resetmart', controllers.resetmart)
 router.post('/deleterecord', controllers.deleterecord)
+router.post('/deleterecords', controllers.deleterecords)
 router.post('/createrecord', controllers.createrecord)
 router.get('/getmark', controllers.getmark)
 router.get('/getrecords', controllers.getrecords)
 router.post('/updatenote', controllers.updatenote)
+router.post('/createopinion', controllers.createopinion)
 
 module.exports = router

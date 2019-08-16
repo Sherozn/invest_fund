@@ -94,7 +94,6 @@
 			//如果缓存中有userinfo的信息，说明用户登录了。
 		  this.userinfo = userinfo
 	    this.getRecords(true)
-	    // console.log("")
   	}
 	}
 </script>

@@ -16,7 +16,13 @@
           <label v-if="note">{{note}}</label>
           <label v-else class="no-note">点击添加</label>
         </div>
-        <div class="image" @click='ellipsi'><image class='img' :src="ellipsis?'/static/images/quxiao.png':src"></image></div>
+        <label v-if="ellipsis">
+          <div class="image" @click='quxiao'><image class='img' src='/static/images/quxiao.png'></image></div>
+        </label>
+        <label v-else>
+          <div class="image" @click='ellipsi'><image class='img' :src="note? src : ''"></image></div>
+        </label>
+        
       </div>
     </div>
     <div class="hide" v-if="ellipsis">
@@ -52,8 +58,15 @@ export default {
   },
   methods: {
     ellipsi () {  
+      if(this.ellipsis){
+        this.note = this.record.note
+      }
       this.ellipsis = !this.ellipsis
       console.log("this.index",this.index)
+    },
+    quxiao () {
+      this.ellipsis = !this.ellipsis
+      this.note = this.record.note
     },
     async addNote () {
       const data = {
@@ -64,6 +77,7 @@ export default {
         const res = await post('/weapp/updatenote', data)
         console.log("res recordList",res)
         this.ellipsis = false
+        this.record.note = this.note
         this.src = '/static/images/bianji.png'
       }catch(e){
         showModal('失败', "请重新提交哦~")

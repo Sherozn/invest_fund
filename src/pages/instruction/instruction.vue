@@ -2,7 +2,7 @@
   <div class="instruction">
     <div class="title">
 		  <img class="img" :src="src">
-      <p class="content content-title">游戏人生是一款自律神器，将分数作为奖励惩罚手段，提醒对良好行为的关注和强化。</p>
+      <p class="content content-title">真自律是一款自律神器，将分数作为奖励惩罚手段，提醒对良好行为的关注和强化。</p>
       <p class="content content-title">将生活想象成通关打怪，打败自己的心魔加分，被心魔打败减分。</p>
     </div>
     <p class="little-tip">1、给大家分享一下我一天的记录：</p>
@@ -58,7 +58,7 @@ export default {
 <style lang='scss'>
 .instruction {
   .title {
-    background:#feb600;
+    background:#feb500;
     border-radius: 16rpx;
     font-size: 16px;
     .img {

@@ -5,7 +5,7 @@
       <div class="modal-content">
         <img class="img" :src="src">
         <div class="content-text">
-          <p class="key-bold">游戏人生是一款自律神器。</p>
+          <p class="key-bold">真自律是一款自律神器。</p>
           <p class="key-bold">将生活想象成通关打怪，打败自己的心魔加分，被心魔打败减分。</p>
           <p class="little-tip">举个例子：</p>
           <p class="little-content">

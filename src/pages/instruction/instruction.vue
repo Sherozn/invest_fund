@@ -50,9 +50,6 @@ export default {
       src3: "../../static/images/me.jpg",
       src4: "../../static/images/share.png"
     }
-  },
-  methods:{
-  	
   }
 }
 </script>
@@ -71,7 +68,6 @@ export default {
       padding:4px 20px 10px 20px;
     }
   }
-
   .content {
     padding:4px 15px;
     font-size: 16px;
@@ -93,7 +89,6 @@ export default {
   .prompts {
     font-size: 15px;
   }
-
   .index-img {
     display:block;
     margin:10px auto;
@@ -101,9 +96,5 @@ export default {
     border-radius: 10px;
     margin-bottom:30px;
   }
-
 }
-
-
-
 </style>

@@ -2,9 +2,11 @@
   <div>
 	  <div class="top">
 	    <div class="userinfo" >
+        <!-- 取userinfo变量中的avatarUrl字段，也就是微信头像的链接 -->
 	      <img :src="userinfo.avatarUrl" alt="">
 	    </div>
 	    <div class="name">
+        <!-- 取userinfo变量中的nickName字段，也就是微信昵称 -->
 	      <label>{{userinfo.nickName}}</label>
 	      <p class="notice">{{quote}}</p>
 	    </div> 
@@ -59,7 +61,7 @@ export default {
     return {
     	// 用户信息
       userinfo: {},
-      // 记录次数
+      // 随机语句
       quote: "",
       src1: "../../static/images/homework.png",
       src2: "../../static/images/classroom.png",

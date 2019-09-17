@@ -60,15 +60,6 @@ export default {
           console.error('登录失败', err)
         }
       })
-    },
-    tapCancel() {
-      console.log("取消");
-      this.$emit('change',false)
-    },
-    //确认
-    confirmSend() {
-      console.log("确认");
-      this.$emit('change',false)
     }
   }
 }

@@ -13,7 +13,7 @@
     "navigationBarTextStyle": "black"
   },
   "tabBar": {
-    "selectedColor": "black",
+    "selectedColor":  "#EA5149",
 
     "list": [{
       "text": "首页",
@@ -22,8 +22,8 @@
       "selectedIconPath": "static/images/danhuang-active.png"
     }, 
     {
-      "pagePath":"pages/record/main",
       "text":"记录",
+      "pagePath":"pages/record/main",
       "iconPath": "static/images/huasheng.png",
       "selectedIconPath": "static/images/huasheng-active.png"
     },

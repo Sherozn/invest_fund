@@ -1,33 +1,29 @@
 <template>
   <div>
   	<!-- 如果用户登录了，则显示首页信息 -->
-  	<div v-if="userinfo.openId">
-  		<div class="show">
-  			<div class="button">
-  				<div class="btn1 right" @click='recall'>撤销</div>
-  				<div class="btn0" @click='reset'>清零</div>
-	  			
-  			</div>
-	  		
-  			<div class="mark-text">当前分数</div>
-  			<div class="mark">{{mark}}</div>
-  		</div>
-  		<div class="row">
-  			<div class="right button" @click='addMark(1)'>+ 1</div>
-  			<div class="left button" @click='addMark(-1)'>- 1</div>
-  		</div>
-  		<div class="row">
-  			<div class="right button" @click='addMark(5)'>+ 5</div>
-  			<div class="left button" @click='addMark(-5)'>- 5</div>
-  		</div>
-  	</div>
-  	<!-- 如果用户没有登录，则显示授权登录的页面 -->
-    <div v-if="showLogin">
-    	<div class="row">
- 				<LoginWindow @change="getModel(arguments)" v-if="changeModel"></LoginWindow>
+		<div class="show">
+			<div class="button">
+				<div class="btn1 right" @click='recall'>撤销</div>
+				<div class="btn0" @click='reset'>清零</div>
 			</div>
-  	</div>
+			<div class="mark-text">当前分数</div>
+			<div class="mark">{{mark}}</div>
+		</div>
+		<div class="row">
+			<div class="right button" @click='addMark(1)'>+ 1</div>
+			<div class="left button" @click='addMark(-1)'>- 1</div>
+		</div>
+		<div class="row">
+			<div class="right button" @click='addMark(5)'>+ 5</div>
+			<div class="left button" @click='addMark(-5)'>- 5</div>
+		</div>
+
+  	<!-- 如果用户没有登录，则显示授权登录的页面 -->
+  	<div class="row">
+			<LoginWindow @change="getModel(arguments)" v-if="showLogin"></LoginWindow>
+		</div>
   </div>
+
 </template>
 
 <script>
@@ -40,10 +36,8 @@
 		data () {
       return {
     	  userinfo:{},
-    	  // src就是我们刚刚粘贴的images文件夹中的图标路径
 	      mark:0,
 	      add:1,
-	      changeModel: true,
 	      showLogin:false,
         val: ""
     	}
@@ -110,7 +104,7 @@
 	    },
       getModel (val) {
       	console.log("val",val)
-	      this.changeModel = val[0]
+	      this.showLogin = val[0]
 	      this.userinfo = val[1]
 	      console.log("this.userinfo",this.userinfo)
 	    }
@@ -129,7 +123,6 @@
 		  }else{
 		  	//如果当前用户没有缓存信息，则隐藏掉TabBar，从而实现在授权登录的页面不显示TabBar的效果
 		  	wx.hideTabBar()
-		  	this.changeModel = true
 		  	this.showLogin = true
 		  }
 		}

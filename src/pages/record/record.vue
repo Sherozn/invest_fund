@@ -41,34 +41,33 @@
 	  },
 	  methods:{
 		  async getRecords (init) {
-	      wx.showToast({
-	        title: '加载中',
-	        icon: 'loading'
-	      })
-	      if(init){
-	        this.page = 0
-	        this.more = true
-	      }
-	      if(this.page === 0){
-	        this.records = []
-	      }
-	      const data = {
-	        page: this.page,
-	        openid: this.userinfo.openId,
-	      }
-		  	const records = await get('/weapp/getrecords', data)
-	      if (records.records.length < 15 && this.page > 0) {
-	        this.more = false
-	      }
-	      this.records = this.records.concat(records.records)
-	      if(this.records.length === 0){
-	        this.show_record = true
-	      }else{
-	        this.show_record = false
-	      }
-		  	console.log('records vue',this.records)
-	      wx.hideToast()
-		  }
+		  		wx.showToast({
+		        title: '加载中',
+		        icon: 'loading'
+		      })
+		      if(init){
+		        this.page = 0
+		        this.more = true
+		      }
+		      if(this.page === 0){
+		        this.records = []
+		      }
+		      const data = {
+		        page: this.page,
+		        openid: this.userinfo.openId,
+		      }
+			  	const records = await get('/weapp/getrecords', data)
+		      if (records.records.length < 15 && this.page > 0) {
+		        this.more = false
+		      }
+		      this.records = this.records.concat(records.records)
+		      if(this.records.length === 0){
+		        this.show_record = true
+		      }else{
+		        this.show_record = false
+		      }
+		      wx.hideToast()
+		  	}
 	  },
 	  onPullDownRefresh () {
 	    this.getRecords(true)
@@ -86,15 +85,21 @@
 	    this.getRecords()
 	  },
 	  onShow () {
-	  	this.getRecords(true)
-	  },
-	  mounted () {
-	  	//获取缓存中名为userinfo的信息。
-			const userinfo = wx.getStorageSync('userinfo')
-			//如果缓存中有userinfo的信息，说明用户登录了。
-		  this.userinfo = userinfo
+	  	const userinfo = wx.getStorageSync('userinfo')
+	    //如果缓存中有userinfo的信息，说明用户登录了。
+	    if(userinfo.openId){
+	      //将用户信息储存到data的userinfo字段里面，this.userinfo就是指的这个字段。
+	      this.userinfo = userinfo
+	    }
 	    this.getRecords(true)
-  	}
+	  },
+	  onShareAppMessage(e) {
+	    return {
+	      title: "真自律",
+		    path: "/pages/index/main",
+		    imageUrl: ""
+	    }
+	  }
 	}
 </script>
 

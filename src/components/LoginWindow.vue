@@ -18,7 +18,11 @@
       </div>
       <div class="modal-footer">
          <!-- 小程序集成的API，通过button来授权登录 -->
-         <button open-type="getUserInfo" lang="zh_CN" class='btn' @getuserinfo="login">授权登录</button>
+         <div class="btnCancel" @tap="tapCancel">取消</div>
+         <div class="btnConfirm">
+           <button open-type="getUserInfo" lang="zh_CN" @getuserinfo="login">授权登录</button>
+         </div>
+         <!--  -->
       </div>
     </div>
   </div>
@@ -52,7 +56,7 @@ export default {
       qcloud.setLoginUrl(config.loginUrl)
       qcloud.login({
         success: res => {
-          wx.showTabBar()
+          // wx.showTabBar()
           console.log('登录成功', res)
           this.loginSuccess(res)
         },
@@ -60,12 +64,15 @@ export default {
           console.error('登录失败', err)
         }
       })
+    },
+    tapCancel () {
+      this.$emit('change',false,{})
     }
   }
 }
 </script>
 
-<style>
+<style scoped>
 .modal-mask {
   width: 100%;
   height: 100%;
@@ -121,11 +128,21 @@ export default {
   text-align: center;
   background:#feb600;
 }
+.btnCancel {
+  width: 50%;
+  font-size: 32rpx;
+  background:#ffffff;
+  text-align: center;
+  border-right: 1px solid #e5e5e5;
+ }
+.btnConfirm {
+  font-size: 32rpx;
+  width: 50%;
+  text-align: center;
+}
 button {
-  width: 100%;
   background:#feb600;
-  color:#FFFFFF;
-  font-weight:bold;
+  color: #ffffff;
 }
 .img {
   width: 280px;

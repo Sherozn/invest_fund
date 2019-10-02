@@ -3,13 +3,18 @@
 	  <div class="top">
 	    <div class="userinfo" >
         <!-- 取userinfo变量中的avatarUrl字段，也就是微信头像的链接 -->
-	      <img :src="userinfo.avatarUrl" alt="">
+	      <img :src="userinfo.avatarUrl" alt="" v-if="userinfo.openId"> 
+        <img :src="avatarUrl" v-else>
 	    </div>
 	    <div class="name">
         <!-- 取userinfo变量中的nickName字段，也就是微信昵称 -->
-	      <label>{{userinfo.nickName}}</label>
+	      <label v-if="userinfo.openId">{{userinfo.nickName}}</label>
+        <div class="underline" @click="loginMe" v-else>点击登录</div>
 	      <p class="notice">{{quote}}</p>
 	    </div> 
+      <div class="row">
+        <LoginWindow @change="getModel(arguments)" v-if="showLogin"></LoginWindow>
+      </div>
 	  </div>
 	  <div class="container">
       <div class="row" @click='showInstruction'>
@@ -56,11 +61,17 @@
 
 <script>
 import {post,showModal,showSuccess} from '@/util'
+import LoginWindow from '@/components/LoginWindow'
 export default {
+  components: {
+    LoginWindow
+  },
 	data () {
     return {
     	// 用户信息
       userinfo: {},
+      showLogin:false,
+      avatarUrl: 'http://image.shengxinjing.cn/rate/unlogin.png',
       // 随机语句
       quote: "",
       src1: "../../static/images/homework.png",
@@ -70,6 +81,15 @@ export default {
     }
   },
   methods: {
+    loginMe () {
+      this.showLogin = true
+    },
+    getModel (val) {
+      console.log("val",val)
+      this.showLogin = val[0]
+      this.userinfo = val[1]
+      console.log("this.userinfo",this.userinfo)
+    },
     //跳转到说明书页面
     showInstruction () {
     	// 小程序API，保留当前页面，跳转到应用内的某个页面
@@ -84,9 +104,13 @@ export default {
     //跳转到意见反馈页面
     showOpinion () {
       // 小程序API，保留当前页面，跳转到应用内的某个页面
-      wx.navigateTo({
-        url:'/pages/opinion/main'
-      })
+      if(this.userinfo.openId){
+        wx.navigateTo({
+          url:'/pages/opinion/main'
+        })
+      }else{
+        this.showLogin = true
+      }
     },
     //生成随机语句
     rankArray () {
@@ -106,15 +130,20 @@ export default {
       this.quote = quotes[rand1]
     },
     confirm () {
-      var that = this
-      wx.showModal({
-        content: `清空之后不能恢复哦~确定要清空吗？`,
-        success: function (res) {
-          if (res.confirm) {
-            that.deleteRecords()
+      if(this.userinfo.openId){
+        var that = this
+        wx.showModal({
+          content: `清空之后不能恢复哦~确定要清空吗？`,
+          success: function (res) {
+            if (res.confirm) {
+              that.deleteRecords()
+            }
           }
-        }
-      })
+        })
+      }else{
+        this.showLogin = true
+      }
+      
     },
     //删除记录
     async deleteRecords () {
@@ -129,14 +158,27 @@ export default {
     }
   },
   onShow () {
-    this.rankArray()
-  },
-  mounted () {
     const userinfo = wx.getStorageSync('userinfo')
-    this.userinfo = userinfo
-    this.rankArray()
+    //如果缓存中有userinfo的信息，说明用户登录了。
+    if(userinfo.openId){
+      //将用户信息储存到data的userinfo字段里面，this.userinfo就是指的这个字段。
+      this.userinfo = userinfo
+      this.rankArray()
+    }
+   
+  },
+  // mounted () {
+  //   const userinfo = wx.getStorageSync('userinfo')
+  //   this.userinfo = userinfo
+  //   this.rankArray()
+  // },
+  onShareAppMessage(e) {
+    return {
+      title: "真自律",
+      path: "/pages/index/main",
+      imageUrl: ""
+    }
   }
-
 }
 </script>
 
@@ -159,7 +201,6 @@ export default {
     .name {
       float:left;
     }
-
   }
   .right {
     float: right;
@@ -184,7 +225,7 @@ export default {
       width: 120rpx;
       height:120rpx;
       margin: 10rpx;
-      border-radius: 50%;
+      border-radius: 1px;
       border: 1px #D0D0D0 solid;
     }
   }
@@ -194,14 +235,14 @@ export default {
     color: #FFFFFF;
     font-size: 16px;
     float: left;
+    .underline{
+      border: 1px solid #ffffff;
+      border-radius:5px;
+      text-align:center;
+    }
     .notice{
       color: #D8D8D8;
       font-size: 12px;
-      .number{
-        font-size: 15px;
-        color: #FFFFFF;
-        font-weight: bold;
-      }
     }
     .a-line{
       background:#EA5149;

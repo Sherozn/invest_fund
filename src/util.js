@@ -22,8 +22,6 @@ function request (url, method, data) {
     	method,
       data,
       success: function (res) {
-      	console.log('我是我是007',res)
-        console.log('res.data.code:', res.data.code)
         if (res.data.code === 0) {
           resolve(res.data.data)
         } else {

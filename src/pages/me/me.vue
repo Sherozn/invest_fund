@@ -37,7 +37,7 @@
       </div>
     </div>
     <div class="container">
-      <div class="row" @click='confirm'>
+      <div class="row" @click='deleteConfirm'>
         <label class="left">
           <img class="img" :src="src3">
         </label>
@@ -129,7 +129,7 @@ export default {
       quotes[0] = '立志言为本，修身行乃先'
       this.quote = quotes[rand1]
     },
-    confirm () {
+    deleteConfirm () {
       if(this.userinfo.openId){
         var that = this
         wx.showModal({
@@ -165,13 +165,7 @@ export default {
       this.userinfo = userinfo
       this.rankArray()
     }
-   
   },
-  // mounted () {
-  //   const userinfo = wx.getStorageSync('userinfo')
-  //   this.userinfo = userinfo
-  //   this.rankArray()
-  // },
   onShareAppMessage(e) {
     return {
       title: "真自律",

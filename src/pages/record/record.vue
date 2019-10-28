@@ -10,7 +10,9 @@
         <div class="mark">最后得分</div>
         <div class="net">备注</div>
       </div>
-        <RecordList :key='index' v-for='(record,index) in records' :record = 'record'></RecordList>
+
+      <RecordList :key='index' v-for='(record,index) in records' :record = 'record'></RecordList>
+      
       <p class="text-footer" v-if="!more">
         没有更多数据
       </p>
@@ -32,42 +34,42 @@
 	  },
 	  data () {
 	    return {
+	    	show_record:false,
 	      userinfo:{},
 	      records:[],
 	      page: 0,
-	      more: true,
-	      show_record:false
+	      more: true
 	    }
 	  },
 	  methods:{
 		  async getRecords (init) {
-		  		wx.showToast({
-		        title: '加载中',
-		        icon: 'loading'
-		      })
-		      if(init){
-		        this.page = 0
-		        this.more = true
-		      }
-		      if(this.page === 0){
-		        this.records = []
-		      }
-		      const data = {
-		        page: this.page,
-		        openid: this.userinfo.openId,
-		      }
-			  	const records = await get('/weapp/getrecords', data)
-		      if (records.records.length < 15 && this.page > 0) {
-		        this.more = false
-		      }
-		      this.records = this.records.concat(records.records)
-		      if(this.records.length === 0){
-		        this.show_record = true
-		      }else{
-		        this.show_record = false
-		      }
-		      wx.hideToast()
-		  	}
+	  		wx.showToast({
+	        title: '加载中',
+	        icon: 'loading'
+	      })
+	      if(init){
+	        this.page = 0
+	        this.more = true
+	      }
+	      if(this.page === 0){
+	        this.records = []
+	      }
+	      const data = {
+	        page: this.page,
+	        openid: this.userinfo.openId,
+	      }
+		  	const records = await get('/weapp/getrecords', data)
+	      if (records.records.length < 15 && this.page > 0) {
+	        this.more = false
+	      }
+	      this.records = this.records.concat(records.records)
+	      if(this.records.length === 0){
+	        this.show_record = true
+	      }else{
+	        this.show_record = false
+	      }
+	      wx.hideToast()
+		  }
 	  },
 	  onPullDownRefresh () {
 	    this.getRecords(true)

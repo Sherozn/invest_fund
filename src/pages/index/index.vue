@@ -67,8 +67,8 @@
 					try{
 				    const res = await post('/weapp/deleterecord', {openid:this.userinfo.openId})
 				    console.log("recall返回的数据",res)
-				    var add = res.add
-				    this.mark = this.mark - add
+				    this.mark = res.mark
+				    console.log("this.mark：",this.mark)
 				    showSuccess("撤销成功")
 				  }catch(e){
 				    showModal('失败', e.data.msg)

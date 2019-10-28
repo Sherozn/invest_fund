@@ -12,24 +12,23 @@
           <label v-if="record.mark >= 0">&nbsp;{{record.mark}}</label>
           <label v-else>{{record.mark}}</label>
         </div>
-        <div class="net" @click='ellipsi'>
+        <div class="net" @click='changeEllipsis'>
           <label v-if="note">{{note}}</label>
           <label v-else class="no-note">点击添加</label>
         </div>
         <label v-if="ellipsis">
-          <div class="image" @click='quxiao'><image class='img' src='/static/images/quxiao.png'></image></div>
+          <div class="image" @click='cancel'><image class='img' src='/static/images/quxiao.png'></image></div>
         </label>
         <label v-else>
-          <div class="image" @click='ellipsi'><image class='img' :src="note? src : ''"></image></div>
+          <div class="image" @click='changeEllipsis'><image class='img' :src="note? src : ''"></image></div>
         </label>
-        
       </div>
     </div>
+
     <div class="hide" v-if="ellipsis">
       <button class="btn" @click='addNote'>
-      <label v-if="record.note">修改</label>
-      <label v-else>添加</label>
-        
+        <label v-if="record.note">修改</label>
+        <label v-else>添加</label>
       </button>
       <input v-model='note'
             class="input"
@@ -40,31 +39,26 @@
 </template>
 
 <script>
-import {get,post,showModal} from '@/util'
+import {post,showModal} from '@/util'
 import {formatTime} from '../utils/index.js'
 export default {
   props: ['record'],
   data () {
-    var util = require('../utils/index.js')
     return {
-      amount:0.0,
-      busi_code:"",
-      cost:0.0,
+      create_time:formatTime(new Date(this.record.create_time)),
       ellipsis: false,
-      create_time:"",
-      note:"",
-      src:""
+      note:this.record.note,
+      src:"/static/images/bianji.png"
     }
   },
   methods: {
-    ellipsi () {  
-      if(this.ellipsis){
-        this.note = this.record.note
-      }
+    changeEllipsis () {  
+      // if(this.ellipsis){
+        // this.note = this.record.note
+      // }
       this.ellipsis = !this.ellipsis
-      console.log("this.index",this.index)
     },
-    quxiao () {
+    cancel () {
       this.ellipsis = !this.ellipsis
       this.note = this.record.note
     },
@@ -78,26 +72,16 @@ export default {
         console.log("res recordList",res)
         this.ellipsis = false
         this.record.note = this.note
-        this.src = '/static/images/bianji.png'
+        // this.src = '/static/images/bianji.png'
       }catch(e){
         showModal('失败', "请重新提交哦~")
       }
-    },
-    getSrc () {
-      if(this.note){
-        this.src = '/static/images/bianji.png'
-      }
     }
-  },
-  mounted () {
-    this.create_time = formatTime(new Date(this.record.create_time))
-    this.note = this.record.note
-    this.getSrc()
   }
 }
 </script>
 
-<style lang='scss' scoped>
+<style lang='scss'>
 .book-card{
   background: #FFFFFF;
   margin-bottom:6px;

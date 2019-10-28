@@ -7,16 +7,24 @@ module.exports = async (ctx) => {
         .where("openid",openid)
         .orderBy('id','desc').first()
     if(res){
-      var add = res.add
       await mysql('records')
         .where("id",res.id).del()
+      //得到撤销后，最后一条记录的当前分数
+      const re_res = await mysql('records')
+          .where("openid",openid)
+          .orderBy('id','desc').first()
+      if(re_res){
+        var mark = re_res.mark
+      }else{
+        var mark = 0
+      }
     }else{
-      var add = 0
+      var mark = 0
     }
-    
+    // 执行成功返回的数据，将删除的这条记录的add值也传回到前端
     ctx.state.data = {
       code: 0,
-      add:add,
+      mark:mark,
       msg: 'success'
     }
   }catch(e){

@@ -55,7 +55,20 @@
           >
         </label>
       </div>
+       <div class="row">
+        <label class="left">
+          <img class="img" :src="src2">
+        </label>
+        <button class="button name" open-type='contact'>&nbsp;&nbsp;联系客服</button>
+        <label class="right">
+          >
+        </label>
+      </div>
 	  </div>
+    <div style="margin-top: 20rpx;">
+     <ad unit-id="adunit-6953ea933382fe7a" ad-type="video" ad-theme="white"></ad>
+    </div>
+    
 	</div>
 </template>
 
@@ -116,17 +129,8 @@ export default {
     rankArray () {
       var a = Math.random() + ""
       var rand1 = a.charAt(5)
-      var quotes = new Array
-      quotes[1] = '不奋发，则心日颓靡；不检束，则心日恣肆'
-      quotes[2] = '自制是一种秩序，一种对于快乐与欲望的控制'
-      quotes[3] = '哪怕一点小小的克制，也会使人变得强而有力'
-      quotes[4] = '做一个自律的人，像优秀的人学习，然后做好自己​'
-      quotes[5] = '真正的自由是在所有时候都能控制自己'
-      quotes[6] = '每天爱自己多一点！！！'
-      quotes[7] = '如果连自己都不能控制，有什么资格去谈自己想要的'
-      quotes[8] = '登峰造极的成就源于自律'
-      quotes[9] = '自我控制是最强者的本能'
-      quotes[0] = '立志言为本，修身行乃先'
+      var quotes = []
+      quotes = ['不奋发，则心日颓靡；不检束，则心日恣肆','自制是一种秩序，一种对于快乐与欲望的控制','哪怕一点小小的克制，也会使人变得强而有力','做一个自律的人，像优秀的人学习，然后做好自己​','真正的自由是在所有时候都能控制自己','每天爱自己多一点！！！','每天爱自己多一点！！！','如果连自己都不能控制，有什么资格去谈自己想要的','登峰造极的成就源于自律','自我控制是最强者的本能','立志言为本，修身行乃先']
       this.quote = quotes[rand1]
     },
     deleteConfirm () {
@@ -203,6 +207,16 @@ export default {
   }
   .left {
     width:80%;
+  }
+  button::after {
+    border: none;
+  }
+  button {
+    background-color: transparent;
+    padding-left: 0;
+    padding-right: 0;
+    line-height:inherit;
+    font-size:15px;
   }
 }  
 

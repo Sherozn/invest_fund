@@ -12,16 +12,19 @@
           <label v-if="record.mark >= 0">&nbsp;{{record.mark}}</label>
           <label v-else>{{record.mark}}</label>
         </div>
-        <div class="net" @click='changeEllipsis'>
-          <label v-if="note">{{note}}</label>
-          <label v-else class="no-note">点击添加</label>
-        </div>
-        <label v-if="ellipsis">
-          <div class="image" @click='cancel'><image class='img' src='/static/images/quxiao.png'></image></div>
-        </label>
-        <label v-else>
-          <div class="image" @click='changeEllipsis'><image class='img' :src="note? src : ''"></image></div>
-        </label>
+        <template v-if='name'>
+          <div class="net" @click='changeEllipsis'>
+            <label v-if="note">{{note}}</label>
+            <label v-else class="no-note">点击添加</label>
+          </div>
+          <label v-if="ellipsis">
+            <div class="image" @click='cancel'><image class='img' src='/static/images/quxiao.png'></image></div>
+          </label>
+          <label v-else>
+            <div class="image" @click='changeEllipsis'><image class='img' :src="note? src : ''"></image></div>
+          </label>
+        </template>
+        
       </div>
     </div>
 
@@ -42,7 +45,7 @@
 import {post,showModal} from '@/util'
 import {formatTime} from '../utils/index.js'
 export default {
-  props: ['record'],
+  props: ['record','name'],
   data () {
     return {
       create_time:formatTime(new Date(this.record.create_time)),

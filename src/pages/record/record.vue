@@ -8,10 +8,10 @@
         <div class="date">时间</div>
         <div class="busi">分数</div>
         <div class="mark">最后得分</div>
-        <div class="net">备注</div>
+        <div v-if="name" class="net">备注</div>
       </div>
 
-      <RecordList :key='index' v-for='(record,index) in records' :record = 'record'></RecordList>
+      <RecordList :key='index' v-for='(record,index) in records' :record = 'record' :name='name'></RecordList>
       
       <p class="text-footer" v-if="!more">
         没有更多数据
@@ -38,7 +38,8 @@
 	      userinfo:{},
 	      records:[],
 	      page: 0,
-	      more: true
+	      more: true,
+	      name:false
 	    }
 	  },
 	  methods:{
@@ -69,6 +70,10 @@
 	        this.show_record = false
 	      }
 	      wx.hideToast()
+		  },
+		  async getName () {
+		  	const res = await get('/weapp/getname')
+		  	this.name = res.name
 		  }
 	  },
 	  onPullDownRefresh () {
@@ -101,6 +106,9 @@
 		    path: "/pages/index/main",
 		    imageUrl: ""
 	    }
+	  },
+	  mounted(){
+	  	this.getName()
 	  }
 	}
 </script>

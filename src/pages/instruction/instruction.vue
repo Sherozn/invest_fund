@@ -6,6 +6,7 @@
       <p class="content content-title">将生活想象成通关打怪，打败自己的心魔加分，被心魔打败减分。</p>
     </div>
     <text>\n</text>
+
     <p class="little-tip">1、给大家分享一下我一天的记录：</p>
     <p class="content tip"><label class="point">◉</label> 早上7点没有按时起床，减1分，目前-1分；</p>
     <p class="content tip"><label class="point">◉</label> 起床看了10页书，加2分，目前1分；</p>
@@ -17,6 +18,7 @@
     <p class="content tip"><label class="point">◉</label> 第二天早上按时起床，加1分，目前5分；</p>
     <p class="content prompts">加减多少分没有具体标准，主要看心魔给自己带来的影响，一般控制在1-10分之间。</p>
     <text>\n</text>
+    <ad unit-id="adunit-6953ea933382fe7a" ad-type="video" ad-theme="white"></ad>
     <p class="little-tip">2、用什么动力来督促自己坚持记录呢？</p>
     <p class="content prompts">（1）设置相应的奖励</p>
     <p class="content tip"><label class="point">◉</label> 心态的奖励。</br>比如分数越多就会越幸运；凑足3个100分，就能有贵人相助等等。虽然听起来比较幼稚，对我自己而言这种心理暗示对生活还是很有积极意义的~</p>

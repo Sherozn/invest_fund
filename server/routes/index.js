@@ -39,5 +39,6 @@ router.get('/getmark', controllers.getmark)
 router.get('/getrecords', controllers.getrecords)
 router.post('/updatenote', controllers.updatenote)
 router.post('/createopinion', controllers.createopinion)
+router.get('/getname', controllers.getname)
 
 module.exports = router

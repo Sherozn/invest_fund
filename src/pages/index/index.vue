@@ -9,14 +9,20 @@
 			<div class="mark-text">当前分数</div>
 			<div class="mark">{{mark}}</div>
 		</div>
+
 		<div class="row">
 			<div class="right button" @click='addMark(1)'>+ 1</div>
 			<div class="left button" @click='addMark(-1)'>- 1</div>
 		</div>
-		<div class="row">
+		<div class="row" style="margin-bottom: 160px;">
 			<div class="right button" @click='addMark(5)'>+ 5</div>
 			<div class="left button" @click='addMark(-5)'>- 5</div>
 		</div>
+
+		<div style="margin-bottom: 10px;">
+			<ad unit-id="adunit-d2d473cd40582f9a" ad-type="grid" grid-opacity="0.8" grid-count="5" ad-theme="white"></ad>
+		</div>
+		
 
   	<!-- 如果用户没有登录，则显示授权登录的页面 -->
   	<div class="row">
@@ -124,7 +130,7 @@
 	      console.log("this.userinfo",this.userinfo)
 	    }
 		},
-		onShow () {
+		mounted () {
 			const userinfo = wx.getStorageSync('userinfo')
 			//如果缓存中有userinfo的信息，说明用户登录了。
 		  if(userinfo.openId){

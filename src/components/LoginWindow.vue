@@ -18,10 +18,10 @@
       </div>
       <div class="modal-footer">
          <!-- 小程序集成的API，通过button来授权登录 -->
-         <div class="btnCancel" @tap="tapCancel">取消</div>
-         <div class="btnConfirm">
+         <!-- <div class="btnCancel" @tap="tapCancel">取消</div> -->
+         <!-- <div class="btnConfirm"> -->
            <button open-type="getUserInfo" lang="zh_CN" @getuserinfo="login">授权登录</button>
-         </div>
+         <!-- </div> -->
          <!--  -->
       </div>
     </div>

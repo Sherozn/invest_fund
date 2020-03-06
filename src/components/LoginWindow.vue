@@ -5,7 +5,7 @@
       <div class="modal-content">
         <img class="img" :src="src">
         <div class="content-text">
-          <p class="key-bold">游戏人生是一款自律神器。</p>
+          <p class="key-bold">真自律是一款自律神器。</p>
           <p class="key-bold">将生活想象成通关打怪，打败自己的心魔加分，被心魔打败减分。</p>
           <p class="little-tip">举个例子：</p>
           <p class="little-content">
@@ -18,7 +18,11 @@
       </div>
       <div class="modal-footer">
          <!-- 小程序集成的API，通过button来授权登录 -->
-         <button open-type="getUserInfo" lang="zh_CN" class='btn' @getuserinfo="login">授权登录</button>
+         <!-- <div class="btnCancel" @tap="tapCancel">取消</div> -->
+         <!-- <div class="btnConfirm"> -->
+           <button open-type="getUserInfo" lang="zh_CN" @getuserinfo="login">授权登录</button>
+         <!-- </div> -->
+         <!--  -->
       </div>
     </div>
   </div>
@@ -52,7 +56,7 @@ export default {
       qcloud.setLoginUrl(config.loginUrl)
       qcloud.login({
         success: res => {
-          wx.showTabBar()
+          // wx.showTabBar()
           console.log('登录成功', res)
           this.loginSuccess(res)
         },
@@ -61,20 +65,14 @@ export default {
         }
       })
     },
-    tapCancel() {
-      console.log("取消");
-      this.$emit('change',false)
-    },
-    //确认
-    confirmSend() {
-      console.log("确认");
-      this.$emit('change',false)
+    tapCancel () {
+      this.$emit('change',false,{})
     }
   }
 }
 </script>
 
-<style>
+<style scoped>
 .modal-mask {
   width: 100%;
   height: 100%;
@@ -130,11 +128,21 @@ export default {
   text-align: center;
   background:#feb600;
 }
+.btnCancel {
+  width: 50%;
+  font-size: 32rpx;
+  background:#ffffff;
+  text-align: center;
+  border-right: 1px solid #e5e5e5;
+ }
+.btnConfirm {
+  font-size: 32rpx;
+  width: 50%;
+  text-align: center;
+}
 button {
-  width: 100%;
   background:#feb600;
-  color:#FFFFFF;
-  font-weight:bold;
+  color: #ffffff;
 }
 .img {
   width: 280px;

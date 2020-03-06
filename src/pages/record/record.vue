@@ -8,9 +8,11 @@
         <div class="date">时间</div>
         <div class="busi">分数</div>
         <div class="mark">最后得分</div>
-        <div class="net">备注</div>
+        <div v-if="name" class="net">备注</div>
       </div>
-        <RecordList :key='index' v-for='(record,index) in records' :record = 'record'></RecordList>
+
+      <RecordList :key='index' v-for='(record,index) in records' :record = 'record' :name='name'></RecordList>
+      
       <p class="text-footer" v-if="!more">
         没有更多数据
       </p>
@@ -32,16 +34,17 @@
 	  },
 	  data () {
 	    return {
+	    	show_record:false,
 	      userinfo:{},
 	      records:[],
 	      page: 0,
 	      more: true,
-	      show_record:false
+	      name:false
 	    }
 	  },
 	  methods:{
 		  async getRecords (init) {
-	      wx.showToast({
+	  		wx.showToast({
 	        title: '加载中',
 	        icon: 'loading'
 	      })
@@ -66,8 +69,11 @@
 	      }else{
 	        this.show_record = false
 	      }
-		  	console.log('records vue',this.records)
 	      wx.hideToast()
+		  },
+		  async getName () {
+		  	const res = await get('/weapp/getname')
+		  	this.name = res.name
 		  }
 	  },
 	  onPullDownRefresh () {
@@ -86,15 +92,24 @@
 	    this.getRecords()
 	  },
 	  onShow () {
-	  	this.getRecords(true)
-	  },
-	  mounted () {
-	  	//获取缓存中名为userinfo的信息。
-			const userinfo = wx.getStorageSync('userinfo')
-			//如果缓存中有userinfo的信息，说明用户登录了。
-		  this.userinfo = userinfo
+	  	const userinfo = wx.getStorageSync('userinfo')
+	    //如果缓存中有userinfo的信息，说明用户登录了。
+	    if(userinfo.openId){
+	      //将用户信息储存到data的userinfo字段里面，this.userinfo就是指的这个字段。
+	      this.userinfo = userinfo
+	    }
 	    this.getRecords(true)
-  	}
+	  },
+	  onShareAppMessage(e) {
+	    return {
+	      title: "真自律",
+		    path: "/pages/index/main",
+		    imageUrl: ""
+	    }
+	  },
+	  mounted(){
+	  	this.getName()
+	  }
 	}
 </script>
 

@@ -1,33 +1,35 @@
 <template>
   <div>
   	<!-- 如果用户登录了，则显示首页信息 -->
-  	<div v-if="userinfo.openId">
-  		<div class="show">
-  			<div class="button">
-  				<div class="btn1 right" @click='recall'>撤销</div>
-  				<div class="btn0" @click='reset'>清零</div>
-	  			
-  			</div>
-	  		
-  			<div class="mark-text">当前分数</div>
-  			<div class="mark">{{mark}}</div>
-  		</div>
-  		<div class="row">
-  			<div class="right button" @click='addMark(1)'>+ 1</div>
-  			<div class="left button" @click='addMark(-1)'>- 1</div>
-  		</div>
-  		<div class="row">
-  			<div class="right button" @click='addMark(5)'>+ 5</div>
-  			<div class="left button" @click='addMark(-5)'>- 5</div>
-  		</div>
-  	</div>
-  	<!-- 如果用户没有登录，则显示授权登录的页面 -->
-    <div v-if="showLogin">
-    	<div class="row">
- 				<LoginWindow @change="getModel(arguments)" v-if="changeModel"></LoginWindow>
+		<div class="show">
+			<div class="button">
+				<div class="btn1 right" @click='recall'>撤销</div>
+				<div class="btn0" @click='reset'>清零</div>
 			</div>
-  	</div>
+			<div class="mark-text">当前分数</div>
+			<div class="mark">{{mark}}</div>
+		</div>
+
+		<div class="row">
+			<div class="right button" @click='addMark(1)'>+ 1</div>
+			<div class="left button" @click='addMark(-1)'>- 1</div>
+		</div>
+		<div class="row" style="margin-bottom: 160px;">
+			<div class="right button" @click='addMark(5)'>+ 5</div>
+			<div class="left button" @click='addMark(-5)'>- 5</div>
+		</div>
+
+		<div style="margin-bottom: 10px;">
+			<ad unit-id="adunit-d2d473cd40582f9a" ad-type="grid" grid-opacity="0.8" grid-count="5" ad-theme="white"></ad>
+		</div>
+		
+
+  	<!-- 如果用户没有登录，则显示授权登录的页面 -->
+  	<div class="row">
+			<LoginWindow @change="getModel(arguments)" v-if="showLogin"></LoginWindow>
+		</div>
   </div>
+
 </template>
 
 <script>
@@ -40,56 +42,67 @@
 		data () {
       return {
     	  userinfo:{},
-    	  // src就是我们刚刚粘贴的images文件夹中的图标路径
 	      mark:0,
 	      add:1,
-	      changeModel: true,
 	      showLogin:false,
         val: ""
     	}
     },
 		methods: {
 	    async addMark (add) {
-	    	try{
-	    		const data = {
-			  		openid: this.userinfo.openId,
-			  		add:add
-			  	}
-			  	console.log("data",data)
-	        const res = await post('/weapp/createrecord', data)
-	        console.log("res",res)
-	        this.mark = this.mark + add
-	      }catch(e){
-	        showModal('失败',"请重试哦~")
-	        console.log("e createrecord",e)
-	      }
+	    	console.log("userinfo=======",this.userinfo)
+	    	if(this.userinfo.openId){
+	    		try{
+		    		const data = {
+				  		openid: this.userinfo.openId,
+				  		add:add
+				  	}
+		        const res = await post('/weapp/createrecord', data)
+		        console.log("addMark返回的数据",res)
+		        this.mark = this.mark + add
+		      }catch(e){
+		        showModal('失败',"请重试哦~")
+		        console.log("e createrecord",e)
+	      	}
+	    	}else{
+	    		this.showLogin = true
+	    	}
 	    },
-	    async recall () {
-	    	try{
-	        const res = await post('/weapp/deleterecord', {openid:this.userinfo.openId})
-	        console.log("res",res)
-	        var add = res.add
-	        this.mark = this.mark - add
-	      }catch(e){
-	        showModal('失败', e.data.msg)
-	      }
-	    },
+			async recall () {
+				if(this.userinfo.openId){
+					try{
+				    const res = await post('/weapp/deleterecord', {openid:this.userinfo.openId})
+				    console.log("recall返回的数据",res)
+				    this.mark = res.mark
+				    console.log("this.mark：",this.mark)
+				    showSuccess("撤销成功")
+				  }catch(e){
+				    showModal('失败', e.data.msg)
+				  }
+				}else{
+					this.showLogin = true
+				}
+			},
 	    reset () {
-	    	var that = this
-	      wx.showModal({
-	        content: `确定要清零吗？`,
-	        success: function (res) {
-	          if (res.confirm) {
-	            that.resetMart()
-	          }
-	        }
-	      })
+	    	if(this.userinfo.openId){
+	    		var that = this
+		      wx.showModal({
+		        content: `确定要清零吗？`,
+		        success: function (res) {
+		          if (res.confirm) {
+		            that.resetMart()
+		          }
+		        }
+		      })
+	    	}else{
+	    		this.showLogin = true
+	    	}
 	    },
 	    async resetMart () {
 	    	if(this.mark != 0){
 	    		try{
 		    		const res = await post('/weapp/resetmart', {openid:this.userinfo.openId})
-		    		console.log("res",res)
+		    		console.log("resetMart返回的数据",res)
 		    		this.mark = 0
 		    	}catch(e){
 		    		showModal('失败', "请重试哦~")
@@ -98,39 +111,43 @@
 	    	}
 	    },
 	    async getCurrentMark () {
-	    	console.log("获取数据")
-	    	try{
-	    		const res = await get('/weapp/getmark', {openid:this.userinfo.openId})
-	    		console.log("res",res)
-	    		this.mark = res.mark
-	    	}catch(e){
-	    		showModal('失败', "页面加载失败，请下拉页面重试哦~")
-	    		console.log("e resetmart",e)
+	    	if(this.userinfo.openId){
+	    		try{
+		    		const res = await get('/weapp/getmark', {openid:this.userinfo.openId})
+		    		console.log("getCurrentMark返回的数据",res)
+		    		this.mark = res.mark
+		    	}catch(e){
+		    		showModal('失败', "页面加载失败，请下拉页面重试哦~")
+		    		console.log("e resetmart",e)
+		    	}
 	    	}
 	    },
       getModel (val) {
       	console.log("val",val)
-	      this.changeModel = val[0]
+	      this.showLogin = val[0]
 	      this.userinfo = val[1]
+	      this.getCurrentMark()
 	      console.log("this.userinfo",this.userinfo)
 	    }
 		},
-		onShow () {
-	  	this.getCurrentMark()
-	  },
 		mounted () {
-			//获取缓存中名为userinfo的信息。
 			const userinfo = wx.getStorageSync('userinfo')
 			//如果缓存中有userinfo的信息，说明用户登录了。
 		  if(userinfo.openId){
 		  	//将用户信息储存到data的userinfo字段里面，this.userinfo就是指的这个字段。
 		  	this.userinfo = userinfo
 		  	this.getCurrentMark()
-		  }else{
-		  	//如果当前用户没有缓存信息，则隐藏掉TabBar，从而实现在授权登录的页面不显示TabBar的效果
-		  	wx.hideTabBar()
-		  	this.changeModel = true
-		  	this.showLogin = true
+		  }
+	  },
+	  onPullDownRefresh () {
+	    this.getCurrentMark()
+	    wx.stopPullDownRefresh()
+	  },
+		onShareAppMessage(e) {
+		  return {
+		    title: "真自律",
+		    path: "/pages/index/main",
+		    imageUrl: ""
 		  }
 		}
 	}
@@ -170,7 +187,6 @@
 			border:1px dashed #feb600;
 		}
 	}
-
 }
 .row{
   margin: 40px 56px;

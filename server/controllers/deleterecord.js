@@ -20,7 +20,6 @@ module.exports = async (ctx) => {
     }else{
       var mark = 0
     }
-
     ctx.state.data = {
       code: 0,
       mark:mark,

@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import {showSuccess,showModal,post} from '@/util'
+import {showModal,post} from '@/util'
 import OpiWindow from '@/components/OpiWindow'
 export default {
   components: {
@@ -61,8 +61,7 @@ export default {
       addimage:"../../static/images/addimage.png",
       word_count:0,
       img_count:0,
-      changeModel:false,
-      style:""
+      changeModel:false
     }
   },
   methods: {
@@ -82,15 +81,22 @@ export default {
     },
     async summit() {
       if(this.word_count > 0){
-        const data = {
-          openid: this.userinfo.openId,
-          opinion:this.opinion,
-          src:this.src.join(","),
-          wechat:this.wechat
+        try{
+          const data = {
+            openid: this.userinfo.openId,
+            opinion:this.opinion,
+            src:this.src.join(","),
+            wechat:this.wechat
+          }
+          const res = await post('/weapp/createopinion', data)
+          console.log("res",res)
+          this.changeModel = true
+        }catch(e){
+          //如果执行失败，util.js中的请求方法，会将返回信息的状态变成rejected
+          //rejected状态的信息会被当成错误捕捉到
+          console.log("从后端返回的执行错误的信息是：",e)
+          showModal("提交失败","服务器出了一点错误~请稍后再试")
         }
-        const res = await post('/weapp/createopinion', data)
-        console.log("res",res)
-        this.changeModel = true
       }else{
         showModal("提交失败","反馈内容不能为空哦~")
       }
@@ -106,11 +112,18 @@ export default {
     src () {
       this.img_count = this.src.length
     }
+  },
+  onShareAppMessage(e) {
+    return {
+      title: "真自律",
+      path: "/pages/index/main",
+      imageUrl: ""
+    }
   }
 }
 </script>
 
-<style lang='scss'>
+<style lang='scss' scoped>
 .container{
   background:#FFFFFF;
   font-size:15px;

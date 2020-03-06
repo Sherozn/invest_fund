@@ -11,14 +11,16 @@ module.exports = async (ctx) => {
     }else{
       var mark = 0
     }
-    
+    // 执行成功返回的数据
     ctx.state.data = {
       code: 0,
       mark:mark,
       msg: 'success'
     }
+    console.log("执行成功")
   }catch(e){
-    console.log("e=============:",e)
+    console.log("执行错误:",e)
+    // 执行失败返回的数据
     ctx.state = {
       code: -1,
       data: {

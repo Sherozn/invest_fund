@@ -7,16 +7,23 @@ module.exports = async (ctx) => {
         .where("openid",openid)
         .orderBy('id','desc').first()
     if(res){
-      var add = res.add
       await mysql('records')
         .where("id",res.id).del()
+      const re_res = await mysql('records')
+          .where("openid",openid)
+          .orderBy('id','desc').first()
+      if(re_res){
+        var mark = re_res.mark
+      }else{
+        var mark = 0
+      }
     }else{
-      var add = 0
+      var mark = 0
     }
-    
+
     ctx.state.data = {
       code: 0,
-      add:add,
+      mark:mark,
       msg: 'success'
     }
   }catch(e){
